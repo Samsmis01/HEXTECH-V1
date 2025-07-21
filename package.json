@@ -1,49 +1,75 @@
 {
-  "name": "ultimate-whatsapp-bot",
+  "name": "hextech-whatsapp-bot",
   "version": "3.0.0",
-  "description": "Bot WhatsApp avec fonctions avancées et anti-bannissement",
+  "description": "Bot WhatsApp HEXTECH avec auto-réparation et gestion intelligente des erreurs",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js --delay 1500ms",
-    "setup": "node install-dependencies.js",
-    "backup": "node scripts/backup.js",
-    "monitor": "node scripts/health-check.js"
+    "prestart": "node ./scripts/preflight.js",
+    "start": "node --trace-warnings --unhandled-rejections=strict index.js",
+    "poststart": "node ./scripts/postflight.js",
+    "dev": "nodemon --delay 2.5 --signal SIGTERM --exec npm start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "eslint --fix .",
+    "lint": "eslint --color --max-warnings=0 .",
+    "backup": "node ./scripts/backup.js",
+    "clean": "npm run clean:modules && npm run clean:sessions",
+    "clean:modules": "rm -rf node_modules package-lock.json",
+    "clean:sessions": "rm -rf sessions",
+    "setup": "npm install --production --no-audit --progress=false --loglevel=error && npm run clean:sessions",
+    "doctor": "node ./scripts/healthcheck.js",
+    "update": "npm update --save --save-exact --no-audit",
+    "security-check": "npm audit --production --audit-level=critical",
+    "fix-deps": "node ./scripts/depFixer.js"
   },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "hextech",
+    "self-healing",
+    "automation"
+  ],
+  "author": "Samsmis",
+  "license": "ISC",
   "dependencies": {
-    "whatsapp-web.js": "^1.25.0",
-    "dotenv": "^16.3.1",
-    "winston": "^3.11.0",
-    "axios": "^1.6.2",
-    "node-cron": "^3.0.2",
-    "fs-extra": "^11.2.0",
-    "mongodb": "^5.7.0",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "user-agents": "^1.0.559",
-    "pm2": "^5.3.1",
-    "rate-limiter-flexible": "^2.4.1",
-    "socket.io": "^4.7.2"
+    "axios": "1.6.2",
+    "chalk": "4.1.2",
+    "dotenv": "16.3.1",
+    "fs-extra": "11.1.1",
+    "moment": "2.29.4",
+    "node-cron": "3.0.2",
+    "puppeteer": "21.7.0",
+    "qrcode-terminal": "0.12.0",
+    "semver": "7.5.4",
+    "sharp": "0.32.6",
+    "whatsapp-web.js": "1.23.1",
+    "winston": "3.11.0",
+    "winston-daily-rotate-file": "4.7.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0",
-    "eslint": "^8.56.0"
+    "eslint": "8.56.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.29.0",
+    "nodemon": "3.0.2",
+    "prettier": "3.1.1"
   },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "os": [
-    "linux",
-    "darwin"
-  ],
-  "cpu": [
-    "x64",
-    "arm64"
-  ],
-  "keywords": [
-    "whatsapp",
-    "bot",
-    "automation"
-  ]
+  "config": {
+    "resilience": {
+      "maxRetries": 3,
+      "retryDelay": 5000,
+      "memoryThreshold": 512
+    }
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Samsmis01/HEXTECH-V1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Samsmis01/HEXTECH-V1/issues"
+  },
+  "homepage": "https://github.com/Samsmis01/HEXTECH-V1#readme"
 }
