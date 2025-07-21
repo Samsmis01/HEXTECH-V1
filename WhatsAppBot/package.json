@@ -1,0 +1,49 @@
+{
+  "name": "ultimate-whatsapp-bot",
+  "version": "3.0.0",
+  "description": "Bot WhatsApp avec fonctions avancées et anti-bannissement",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js --delay 1500ms",
+    "setup": "node install-dependencies.js",
+    "backup": "node scripts/backup.js",
+    "monitor": "node scripts/health-check.js"
+  },
+  "dependencies": {
+    "whatsapp-web.js": "^1.25.0",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "axios": "^1.6.2",
+    "node-cron": "^3.0.2",
+    "fs-extra": "^11.2.0",
+    "mongodb": "^5.7.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "user-agents": "^1.0.559",
+    "pm2": "^5.3.1",
+    "rate-limiter-flexible": "^2.4.1",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "eslint": "^8.56.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "os": [
+    "linux",
+    "darwin"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "automation"
+  ]
+}
