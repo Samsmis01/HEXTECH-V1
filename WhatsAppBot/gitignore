@@ -1,0 +1,15 @@
+# Fichiers sensibles
+.env
+sessions/
+storage/
+logs/
+
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Fichiers système
+.DS_Stor
